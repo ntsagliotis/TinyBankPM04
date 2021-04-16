@@ -1,0 +1,41 @@
+﻿
+@{ ViewData["Title"] = "Card Payment"; }
+<div class="text-center">
+    <h1 class="display-4">Card Payment</h1>
+</div>
+
+<div class="card-form">
+    <div class="alert alert-success collapse" id="js-alert-success" role="alert">Payment was successful!</div>
+    <div class="alert alert-danger collapse" id="js-alert-danger" role="alert">Payment failed!</div>
+    <div>
+        <form action="/card" method="get" id="js-card-form">
+            <div>
+                <label>Car Number:</label>
+                <input class="form-control js-card-number"
+                       name="cardNumber"
+                       value="" />
+            </div>
+            <div>
+                <label>Expiration Month:</label>
+                <input class="form-control js-expiration-month"
+                       name="expirationMonth"
+                       value="" />
+            </div>
+            <div>
+                <label>Expiration Year:</label>
+                <input class="form-control js-expiration-year"
+                       name="xpirationYear"
+                       value="" />
+            </div>
+            <div>
+                <label>Amount:</label>
+                <input class="form-control js-amount"
+                       name="amount"
+                       value="" />
+            </div>
+            <button type="button" class="btn btn-primary js-pay">
+                Pay
+            </button>
+        </form>
+    </div>
+</div>

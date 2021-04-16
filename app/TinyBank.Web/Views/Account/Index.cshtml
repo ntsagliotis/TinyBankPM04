@@ -1,0 +1,21 @@
+﻿@model TinyBank.Core.Model.Account
+
+@{ ViewData["Title"] = "Account"; }
+<div class="text-center">
+    <h1 class="display-4">Account</h1>
+</div>
+
+<div>
+    <table class="table js-customers-list">
+        <thead>
+            <tr>
+                <th scope="col">IBAN</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="IBAN">@Model.AccountId</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

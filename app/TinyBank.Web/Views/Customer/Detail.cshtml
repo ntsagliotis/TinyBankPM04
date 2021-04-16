@@ -1,0 +1,116 @@
+﻿@model TinyBank.Core.Model.Customer
+
+@{ ViewData["Title"] = "Customer Detail"; }
+
+<div class="text-center">
+    <h1 class="display-4">@Model.Firstname @Model.Lastname</h1>
+</div>
+
+<div>
+    <form>
+        <input class="js-customer-id" type="hidden" value="@Model.CustomerId" />
+        <div class="form-group">
+            <label>Vat number</label>
+            <input class="form-control" value="@Model.VatNumber">
+        </div>
+
+        <div class="form-group">
+            <label>First name</label>
+            <input class="form-control js-first-name" value="@Model.Firstname">
+        </div>
+
+        <div class="form-group">
+            <label>Last name</label>
+            <input class="form-control js-last-name" value="@Model.Lastname">
+        </div>
+
+        <div class="form-group">
+            <label>Registered</label>
+            <input class="form-control" value="@Model.AuditInfo.Created.ToString("dd/MM/yyyy")">
+        </div>
+    </form>
+
+    <div class="text-center">
+        <button type="button" class="btn btn-primary js-update-customer">
+            Update
+        </button>
+    </div>
+
+    <table class="table accounts-table">
+        <thead>
+            <tr>
+                <th scope="col">IBAN</th>
+                <th scope="col">Balance</th>
+                <th scope="col">Created</th>
+                <th scope="col">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var account in Model.Accounts)
+            {
+            <tr>
+                <td class="IBAN">@account.AccountId</td>
+                <td class="Balance">@account.Balance</td>
+                <td class="Created">@account.AuditInfo.Created.ToString("dd/MM/yyyy")</td>
+                <td class="Account">
+                    <button type="button"
+                            class="btn btn-primary exampleModal"
+                            data-toggle="modal"
+                            data-target="#exampleModal"
+                            data-IBAN="@account.AccountId"
+                            data-Currency="@account.CurrencyCode"
+                            data-Description="@account.Description"
+                            data-State="@account.State">
+                        Account Detail
+                    </button>
+                </td>
+            </tr>}
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Accunt Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label>IBAN:</label>
+                        <input class="form-control IBAN" value="" name="IBAN" id="IBAN">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <input class="form-control" value="" name="Description" id="Description">
+                    </div>
+                    <div class="form-group">
+                        <label>Currency:</label>
+                        <input class="form-control" value="" name="Currency" id="Currency">
+                    </div>
+                    <div class="form-group">
+                        <label>State:</label>
+                        <input class="form-control" value="" name="State" id="State">
+                    </div>
+                </form>
+                <select class="AccountStateCombo" id="="AccountStateCombo">
+                    <option selected="">change Account State</option>
+                    <option value="1">Active</option>
+                    <option value="2">Inactive</option>
+                    <option value="3">Suspended</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary UpdateState">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
